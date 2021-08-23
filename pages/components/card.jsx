@@ -1,8 +1,6 @@
 import Link from "next/link";
 
-const Card = ({ data }) => {
-	const { title, image, category, desc } = data;
-
+const Card = ({ title, image, category, desc }) => {
 	return (
 		<div className="mt-20">
 			<Link href="#">

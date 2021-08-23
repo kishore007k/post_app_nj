@@ -53,7 +53,13 @@ const BlogGrid = () => {
 	return (
 		<div className="grid grid-cols-4 gap-5 pb-20">
 			{data.map((item, index) => (
-				<Card key={index} data={item} />
+				<Card
+					key={index}
+					title={item.title}
+					desc={item.desc}
+					image={item.image}
+					category={item.category}
+				/>
 			))}
 		</div>
 	);
