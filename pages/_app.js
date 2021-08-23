@@ -1,7 +1,17 @@
-import 'tailwindcss/tailwind.css'
+import "../styles/global.css";
+import "tailwindcss/tailwind.css";
+
+import Head from "next/head";
 
 function MyApp({ Component, pageProps }) {
-  return <Component {...pageProps} />
+	return (
+		<>
+			<Head>
+				<link rel="shortcut icon" href="/logo.png" />
+			</Head>
+			<Component {...pageProps} />
+		</>
+	);
 }
 
-export default MyApp
+export default MyApp;
