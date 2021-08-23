@@ -1,9 +1,9 @@
 import Link from "next/link";
 
-const Card = ({ title, image, category, desc }) => {
+const Card = ({ title, image, category, desc, id }) => {
 	return (
 		<div className="mt-20">
-			<Link href="#">
+			<Link href={`/post/${id}`}>
 				<a>
 					<div className="w-full h-52 mb-5">
 						<img

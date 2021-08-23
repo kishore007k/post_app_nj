@@ -1,11 +1,13 @@
+import Link from "next/link";
+
 const Header = () => {
 	return (
 		<nav className="py-5 border-b border-lightBorder filter bg-white bg-opacity-70 fixed w-screen z-10 backdrop-filter backdrop-blur-md backdrop-saturate-150">
 			<div className="container mx-auto max-w-screen-xl flex justify-between items-center">
 				<div>
-					<h4 className="font-rampart font-bold text-2xl cursor-pointer">
-						K-Blog📝
-					</h4>
+					<Link href="/">
+						<a className="font-rampart font-bold text-2xl">K-Blog📝</a>
+					</Link>
 				</div>
 				<div className="flex items-center">
 					<ul className="flex justify-center space-x-10 mr-12 font-semibold text-black text-lg cursor-pointer relative">

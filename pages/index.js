@@ -1,6 +1,6 @@
-import BlogGrid from "./components/blogGrid";
 import Header from "./components/header";
 import Hero from "./components/hero";
+import PostGrid from "./post";
 
 export default function Home() {
 	return (
@@ -8,7 +8,7 @@ export default function Home() {
 			<Header />
 			<div className="container mx-auto max-w-screen-xl pt-40 px-5">
 				<Hero />
-				<BlogGrid />
+				<PostGrid />
 			</div>
 		</div>
 	);

@@ -37,3 +37,15 @@
   width: 100%;
 	left: 0;
 }
+
+.userImage::after{
+  position: absolute;
+  content: "";
+  width: 100px;
+  height: 100px;
+  background-color: white;
+  top: -10px;
+  left: -10px;
+  border-radius: 50%;
+  z-index: -1;
+}
