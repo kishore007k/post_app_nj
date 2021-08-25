@@ -6,7 +6,9 @@ const Hero = () => {
 
 	return (
 		<div className="space-y-10">
-			<h1 className="text-center font-extrabold text-black text-7xl">Blog</h1>
+			<h1 className="text-center font-extrabold text-black text-7xl font-sourceCodePro">
+				Blog
+			</h1>
 			<p className="text-center max-w-screen-md mx-auto font-normal text-lg font-inter">
 				Lorem ipsum dolor sit amet consectetur adipisicing elit. Veniam inventore
 				aspernatur nesciunt blanditiis dolor molestias dolorem.
@@ -17,7 +19,7 @@ const Hero = () => {
 				</span>
 				<input
 					type="text"
-					className="border border-border p-2 rounded-lg w-full pl-11 font-medium font-border focus:outline-none focus:placeholder-transparent"
+					className="border border-border p-2 rounded-lg w-full pl-11 font-medium font-border font-sourceCodePro focus:outline-none focus:placeholder-transparent"
 					placeholder="Search for articles"
 					value={searchInput}
 					onChange={(e) => setSearchInput(e.target.value)}
