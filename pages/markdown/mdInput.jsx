@@ -8,6 +8,7 @@ import remarkGfm from "remark-gfm";
 import "react-markdown-editor-lite/lib/index.css";
 import rehypeKatex from "rehype-katex";
 import "katex/dist/katex.min.css";
+import axios from "axios";
 
 const MdInput = () => {
 	const [cover, setCover] = useState("");
@@ -16,7 +17,30 @@ const MdInput = () => {
 
 	const [editMode, setEditMode] = useState(true);
 
-	console.log(textValue);
+	const config = {
+		headers: {
+			Authorization: `Bearer ${token}`,
+		},
+	};
+
+	const sendData = async () => {
+		const response = await axios.post(
+			`${BACKEND_URL}/posts/create`,
+			{
+				title,
+				pImage: cover,
+				pBody: textValue,
+				pAuthor: "611fd709af36bf3ed8511d9b",
+				category: "Action",
+				tag: "Novel",
+			},
+			config
+		);
+
+		const data = await response.data.data;
+
+		console.log(data);
+	};
 
 	return (
 		<Layout>
@@ -170,6 +194,16 @@ const MdInput = () => {
 						</div>
 					</div>
 				</div>
+			</div>
+
+			{/* Save Btn */}
+			<div>
+				<button
+					className="px-3 py-2 border border-red-400 text-xl font-inter"
+					onClick={sendData}
+				>
+					Save
+				</button>
 			</div>
 		</Layout>
 	);
