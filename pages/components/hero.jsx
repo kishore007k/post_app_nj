@@ -6,7 +6,7 @@ const Hero = () => {
 
 	return (
 		<div className="space-y-10">
-			<h1 className="text-center font-extrabold text-black text-7xl font-sourceCodePro">
+			<h1 className="text-center font-extrabold text-skin-base text-7xl font-sourceCodePro">
 				Blog
 			</h1>
 			<p className="text-center max-w-screen-md mx-auto font-normal text-lg font-inter">

@@ -1,7 +1,7 @@
 module.exports = {
 	mode: "jit",
 	purge: ["./pages/**/*.{js,ts,jsx,tsx}", "./components/**/*.{js,ts,jsx,tsx}"],
-	darkMode: false, // or 'media' or 'class'
+	darkMode: "class", // or 'media' or 'class'
 	theme: {
 		color: {
 			lightBorder: "var(--lightBorder)",
@@ -16,10 +16,16 @@ module.exports = {
 			klee: ["Klee One", "cursive"],
 			inter: ["Inter", "sans-serif"],
 		},
-		extend: {},
+		extend: {
+			textColor: {
+				skin: {
+					base: "var(--black)",
+				},
+			},
+		},
 	},
 	variants: {
 		extend: {},
 	},
-	plugins: [],
+	plugins: [require("tailwind-scrollbar"), require("@tailwindcss/typography")],
 };

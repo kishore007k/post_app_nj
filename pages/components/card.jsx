@@ -13,7 +13,7 @@ const Card = ({ title, image, category, desc, id }) => {
 						/>
 					</div>
 					<div className="space-y-3">
-						<span className="capitalize font-inter font-medium text-black text-sm">
+						<span className="capitalize font-inter font-medium text-skin-base text-sm">
 							{category}
 						</span>
 						<h3 className="font-inter text-2xl font-bold capitalize transition duration-300 ease-in-out hover:text-red-400">

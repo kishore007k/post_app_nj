@@ -10,7 +10,7 @@ const Header = () => {
 					</Link>
 				</div>
 				<div className="flex items-center">
-					<ul className="flex justify-center space-x-10 mr-12 font-semibold text-black text-lg cursor-pointer relative">
+					<ul className="flex justify-center space-x-10 mr-12 font-semibold text-skin-base text-lg cursor-pointer relative">
 						<li className="hoverEffect font-klee">Services</li>
 						<li className="hoverEffect font-klee">Case Studies</li>
 						<li className="hoverEffect font-klee">Work</li>

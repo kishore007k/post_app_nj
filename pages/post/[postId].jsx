@@ -14,7 +14,7 @@ const PostDetails = () => {
 					motivation
 				</h4>
 
-				<h1 className="font-inter text-black font-bold text-6xl">
+				<h1 className="font-inter text-skin-base font-bold text-6xl">
 					The Secret to Find a True Happiness
 				</h1>
 
