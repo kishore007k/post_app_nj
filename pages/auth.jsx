@@ -1,5 +1,8 @@
+import axios from "axios";
 import { useState } from "react";
+import { useDispatch } from "react-redux";
 import Layout from "./components/layout";
+import { userSignIn, userSignUp } from "./redux/actions";
 
 const AuthPage = () => {
 	const [signUp, setSignUp] = useState(false);
@@ -9,6 +12,10 @@ const AuthPage = () => {
 	const [password, setPassword] = useState("");
 	const [cPassword, setCPassword] = useState("");
 
+	const backendUrl = process.env.BACKEND_URL;
+
+	const dispatch = useDispatch();
+
 	const handleChange = () => {
 		setSignUp(!signUp);
 		setUserName("");
@@ -17,8 +24,34 @@ const AuthPage = () => {
 		setCPassword("");
 	};
 
-	const handleSubmit = (e) => {
+	const handleSignUp = (e) => {
 		e.preventDefault();
+		const result = axios
+			.post(`${backendUrl}/users/signUp`, {
+				userName,
+				email,
+				password,
+				cPassword,
+			})
+			.then((res) => dispatch(userSignUp(res.data)))
+			.catch((err) => console.log(err));
+		return result;
+	};
+
+	const handleSignIn = (e) => {
+		e.preventDefault();
+		const result = axios
+			.post(`${backendUrl}/users/signIn`, {
+				email,
+				password,
+			})
+			.then((res) => {
+				dispatch(userSignIn(res.data));
+				window.localStorage.setItem("userData", JSON.stringify(res.data.data));
+				window.localStorage.setItem("token", res.data.token);
+			})
+			.catch((err) => console.log(err));
+		return result;
 	};
 
 	return (
@@ -133,13 +166,23 @@ const AuthPage = () => {
 									</div>
 								)}
 
-								<button
-									type="submit"
-									class="w-full block bg-red-400 hover:bg-red-300 focus:bg-red-400 focus:outline-none text-white font-semibold tracking-widest rounded-lg px-4 py-3 mt-6 font-inter"
-									onClick={handleSubmit}
-								>
-									{signUp ? "Sign Up" : "Sign In"}
-								</button>
+								{signUp ? (
+									<button
+										type="submit"
+										class="w-full block bg-red-400 hover:bg-red-300 focus:bg-red-400 focus:outline-none text-white font-semibold tracking-widest rounded-lg px-4 py-3 mt-6 font-inter"
+										onClick={handleSignUp}
+									>
+										Sign Up
+									</button>
+								) : (
+									<button
+										type="submit"
+										class="w-full block bg-red-400 hover:bg-red-300 focus:bg-red-400 focus:outline-none text-white font-semibold tracking-widest rounded-lg px-4 py-3 mt-6 font-inter"
+										onClick={handleSignIn}
+									>
+										Sign In
+									</button>
+								)}
 							</form>
 
 							<hr class="my-6 border-gray-300 w-full" />
