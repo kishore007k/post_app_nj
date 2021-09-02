@@ -2,7 +2,8 @@ import axios from "axios";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import Layout from "./components/layout";
-import { userSignIn, userSignUp } from "./redux/actions";
+import { userSignIn, userSignUp } from "../redux/actions";
+import Cookie from "js-cookie";
 
 const AuthPage = () => {
 	const [signUp, setSignUp] = useState(false);
@@ -47,8 +48,8 @@ const AuthPage = () => {
 			})
 			.then((res) => {
 				dispatch(userSignIn(res.data));
-				window.localStorage.setItem("userData", JSON.stringify(res.data.data));
-				window.localStorage.setItem("token", res.data.token);
+				Cookie.set("userData", JSON.stringify(res.data.data));
+				Cookie.set("token", res.data.token);
 			})
 			.catch((err) => console.log(err));
 		return result;

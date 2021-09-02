@@ -3,13 +3,16 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start"
+    "start": "next start",
+    "lint": "next lint"
   },
   "dependencies": {
+    "@next/eslint-plugin-next": "^11.1.2",
     "@reduxjs/toolkit": "^1.6.1",
     "@tailwindcss/forms": "^0.3.3",
     "@tailwindcss/typography": "^0.4.1",
     "axios": "^0.21.1",
+    "js-cookie": "^3.0.1",
     "markdown-to-jsx": "^7.1.3",
     "next": "latest",
     "react": "^17.0.2",
@@ -29,6 +32,9 @@
   },
   "devDependencies": {
     "autoprefixer": "^10.2.6",
+    "eslint": "^7.32.0",
+    "eslint-plugin-import": "^2.24.2",
+    "eslint-plugin-react": "^7.25.1",
     "postcss": "^8.3.5",
     "tailwindcss": "^2.2.4"
   }

@@ -1,6 +1,27 @@
 import Link from "next/link";
+import Cookie from "js-cookie";
+import { useEffect, useState } from "react";
+import { useRouter } from "next/router";
 
 const Header = () => {
+	const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+	const router = useRouter();
+
+	const handleLogOut = (e) => {
+		e.preventDefault();
+		Cookie.remove("userData");
+		Cookie.remove("token");
+		router.push("/");
+	};
+
+	useEffect(() => {
+		const loggedIn = Cookie.get("token");
+		if (loggedIn) {
+			setIsLoggedIn(true);
+		}
+	}, [isLoggedIn]);
+
 	return (
 		<nav className="py-5 border-b border-lightBorder filter bg-white bg-opacity-70 fixed w-screen z-10 backdrop-filter backdrop-blur-md backdrop-saturate-150">
 			<div className="container mx-auto max-w-screen-xl flex justify-between items-center">
@@ -28,11 +49,20 @@ const Header = () => {
 						</Link>
 					</ul>
 					<div>
-						<Link href="/auth">
-							<a className="font-klee font-bold text-white px-5 py-2 bg-gray-900 cursor-pointer transition-all duration-300 hover:bg-red-500">
-								Login
-							</a>
-						</Link>
+						{isLoggedIn ? (
+							<button
+								onClick={handleLogOut}
+								className="font-klee font-bold text-white px-5 py-2 bg-gray-900 cursor-pointer transition-all duration-300 hover:bg-red-500"
+							>
+								Log Out
+							</button>
+						) : (
+							<Link href="/auth">
+								<a className="font-klee font-bold text-white px-5 py-2 bg-gray-900 cursor-pointer transition-all duration-300 hover:bg-red-500">
+									Login
+								</a>
+							</Link>
+						)}
 					</div>
 				</div>
 			</div>

@@ -3,7 +3,7 @@ import "tailwindcss/tailwind.css";
 
 import Head from "next/head";
 import { Provider } from "react-redux";
-import store from "./redux/store";
+import store from "../redux/store";
 
 function MyApp({ Component, pageProps }) {
 	return (

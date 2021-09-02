@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import FileBase from "react-file-base64";
 import Layout from "../components/layout";
 
@@ -9,6 +9,7 @@ import "react-markdown-editor-lite/lib/index.css";
 import rehypeKatex from "rehype-katex";
 import "katex/dist/katex.min.css";
 import axios from "axios";
+import Cookie from "js-cookie";
 
 const MdInput = () => {
 	const [cover, setCover] = useState("");
@@ -16,8 +17,11 @@ const MdInput = () => {
 	const [textValue, setTextValue] = useState("");
 
 	const [editMode, setEditMode] = useState(true);
+	const [token, setToken] = useState("");
 
-	const token = window.localStorage.getItem("token");
+	useEffect(() => {
+		setToken(Cookie.get("token"));
+	}, [token]);
 
 	const config = {
 		headers: {
@@ -38,9 +42,7 @@ const MdInput = () => {
 			},
 			config
 		);
-
 		const data = await response.data.data;
-
 		console.log(data);
 	};
 
