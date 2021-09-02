@@ -1,11 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Klee+One:wght@400;600&family=Source+Code+Pro:wght@200;300;400;500;600;700;900&family=Inter:wght@100;300;400;500;600;700;800;900&family=Rampart+One&display=swap');
 
 @tailwind base;
-
-#toggle:checked ~ label div.toggle-dot {
-  @apply translate-x-3;
-}
-
 @tailwind components;
 @tailwind utilities;
 
@@ -15,6 +10,7 @@
   --lightGray: #78767F;
   --darkGray: #5D5A65;
   --border: #D3D6DB;
+  --active: #ef4444;
 }
 
 *, *::after, *::before{
@@ -26,6 +22,12 @@
 
 .hoverEffect {
   position: relative;
+  color: var(--black);
+  transition: all 0.4s ease-in-out;
+}
+
+.hoverEffect:hover{
+  color: var(--active);
 }
 
 .hoverEffect::after{
@@ -33,7 +35,7 @@
 	content: "";
 	width: 0%;
 	height: 4px;
-	background-color: var(--darkGray);
+	background-color: var(--active);
 	left: 50%;
 	bottom: -10px;
   border-radius: 5px;
@@ -67,4 +69,18 @@
   opacity: 0;
   cursor: pointer;
   z-index: -1;
+}
+
+.floating-input>input::placeholder {
+  color: transparent;
+}
+
+.floating-input>input:focus,
+.floating-input>input:not(:placeholder-shown) { 
+@apply pt-10
+}
+
+.floating-input>input:focus~label, 
+.floating-input>input:not(:placeholder-shown)~label {
+@apply opacity-75 scale-75 -translate-y-3 translate-x-1; 
 }

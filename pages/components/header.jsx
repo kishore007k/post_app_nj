@@ -11,16 +11,28 @@ const Header = () => {
 				</div>
 				<div className="flex items-center">
 					<ul className="flex justify-center space-x-10 mr-12 font-semibold text-skin-base text-lg cursor-pointer relative">
-						<li className="hoverEffect font-klee">Services</li>
-						<li className="hoverEffect font-klee">Case Studies</li>
-						<li className="hoverEffect font-klee">Work</li>
-						<li className="hoverEffect font-klee">Blog</li>
-						<li className="hoverEffect font-klee">About</li>
+						<Link href="/">
+							<a className="hoverEffect font-klee">Services</a>
+						</Link>
+						<Link href="/markdown/mdInput">
+							<a className="hoverEffect font-klee">Create Blog</a>
+						</Link>
+						<Link href="/">
+							<a className="hoverEffect font-klee">Work</a>
+						</Link>
+						<Link href="/">
+							<a className="hoverEffect font-klee">Blog</a>
+						</Link>
+						<Link href="/">
+							<a className="hoverEffect font-klee">About</a>
+						</Link>
 					</ul>
 					<div>
-						<button className="font-klee font-semibold px-5 py-3 bg-gray-900 text-white cursor-pointer scale-100 transition-all duration-300 hover:scale-105">
-							Contact Us
-						</button>
+						<Link href="/auth">
+							<a className="font-klee font-bold text-white px-5 py-2 bg-gray-900 cursor-pointer transition-all duration-300 hover:bg-red-500">
+								Login
+							</a>
+						</Link>
 					</div>
 				</div>
 			</div>

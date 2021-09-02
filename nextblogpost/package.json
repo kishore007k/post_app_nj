@@ -1,0 +1,33 @@
+{
+  "name": "nextblogpost",
+  "private": true,
+  "version": "1.0.0",
+  "description": "This example shows how to use [Tailwind CSS](https://tailwindcss.com/) [(v2.2)](https://blog.tailwindcss.com/tailwindcss-2-2) with Next.js. It follows the steps outlined in the official [Tailwind docs](https://tailwindcss.com/docs/guides/nextjs)",
+  "main": "package.json",
+  "author": "kishore kumar <kishorekumarstar07@gmail.com>",
+  "license": "UNLICENSED",
+  "scripts": {
+    "start": "sanity start",
+    "build": "sanity build"
+  },
+  "keywords": [
+    "sanity"
+  ],
+  "dependencies": {
+    "@sanity/base": "^2.15.1",
+    "@sanity/components": "^2.14.0",
+    "@sanity/core": "^2.15.0",
+    "@sanity/default-layout": "^2.15.1",
+    "@sanity/default-login": "^2.15.0",
+    "@sanity/desk-tool": "^2.15.2",
+    "@sanity/vision": "^2.15.0",
+    "markdown-it": "^12.2.0",
+    "prop-types": "^15.7",
+    "react": "^17.0",
+    "react-dom": "^17.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/kishore007k/post_app_nj.git"
+  }
+}
