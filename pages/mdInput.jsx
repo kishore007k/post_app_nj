@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import FileBase from "react-file-base64";
-import Layout from "../components/layout";
+import Layout from "./components/layout";
 
 import ReactMarkdown from "react-markdown";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
@@ -15,12 +15,16 @@ const MdInput = () => {
 	const [cover, setCover] = useState("");
 	const [title, setTitle] = useState("");
 	const [textValue, setTextValue] = useState("");
+	const [category, setCategory] = useState("");
+	const [tag, setTag] = useState("");
 
 	const [editMode, setEditMode] = useState(true);
 	const [token, setToken] = useState("");
+	const [user, setUser] = useState(null);
 
 	useEffect(() => {
 		setToken(Cookie.get("token"));
+		setUser(JSON.parse(Cookie.get("userData")));
 	}, [token]);
 
 	const config = {
@@ -36,9 +40,9 @@ const MdInput = () => {
 				title,
 				pImage: cover,
 				pBody: textValue,
-				pAuthor: "611fd709af36bf3ed8511d9b",
-				category: "Action",
-				tag: "Novel",
+				pAuthor: user._id,
+				category,
+				tag,
 			},
 			config
 		);
@@ -117,6 +121,22 @@ const MdInput = () => {
 										</label>
 									</div>
 								)}
+							</div>
+							<div className="flex justify-center px-8">
+								<input
+									type="text"
+									placeholder="Category"
+									className="text-2xl w-full font-inter text-skin-base tracking-wider outline-none placeholder-gray-400 mt-10 px-3 py-2 bg-gray-50"
+									onChange={(e) => setCategory(e.target.value)}
+									value={category}
+								/>
+								<input
+									type="text"
+									placeholder="Tag"
+									className="text-2xl w-full font-inter text-skin-base tracking-wider outline-none placeholder-gray-400 mt-10 px-3 py-2 bg-gray-50"
+									onChange={(e) => setTag(e.target.value)}
+									value={tag}
+								/>
 							</div>
 							<div className="p-8 w-full">
 								<input

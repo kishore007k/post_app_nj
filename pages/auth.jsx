@@ -4,6 +4,7 @@ import { useDispatch } from "react-redux";
 import Layout from "./components/layout";
 import { userSignIn, userSignUp } from "../redux/actions";
 import Cookie from "js-cookie";
+import { useRouter } from "next/router";
 
 const AuthPage = () => {
 	const [signUp, setSignUp] = useState(false);
@@ -16,6 +17,7 @@ const AuthPage = () => {
 	const backendUrl = process.env.BACKEND_URL;
 
 	const dispatch = useDispatch();
+	const router = useRouter();
 
 	const handleChange = () => {
 		setSignUp(!signUp);
@@ -50,6 +52,7 @@ const AuthPage = () => {
 				dispatch(userSignIn(res.data));
 				Cookie.set("userData", JSON.stringify(res.data.data));
 				Cookie.set("token", res.data.token);
+				router.push("/");
 			})
 			.catch((err) => console.log(err));
 		return result;
@@ -58,40 +61,41 @@ const AuthPage = () => {
 	return (
 		<Layout>
 			<div className="pt-40 pb-20 container max-w-screen-xl mx-auto">
-				<section class="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 h-screen lg:overflow-hidden">
-					<div class="hidden lg:block xl:col-span-2 h-full">
+				<section className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 h-screen lg:overflow-hidden">
+					<div className="hidden lg:block xl:col-span-2 h-full">
 						<img
 							src="https://images.unsplash.com/photo-1581090700227-1e37b190418e?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80"
 							alt="Silhouette of woman wearing black hat and black coat"
-							class="w-full h-full object-cover"
+							className="w-full h-full object-cover"
 							id="bg"
 						/>
 					</div>
 
-					<div class="w-full xl:flex xl:flex-col xl:justify-center md:max-w-md lg:max-w-full md:mx-auto h-full px-6 lg:px-16 xl:px-12 py-8 md:py-16 lg:py-20 lg:overflow-auto">
-						<span class="text-lg md:text-xl font-bold text-center xl:text-4xl text-gray-800 xl:mb-10 font-rampart">
+					<div className="w-full xl:flex xl:flex-col xl:justify-center md:max-w-md lg:max-w-full md:mx-auto h-full px-6 lg:px-16 xl:px-12 py-8 md:py-16 lg:py-20 lg:overflow-auto">
+						<span className="text-lg md:text-xl font-bold text-center xl:text-4xl text-gray-800 xl:mb-10 font-rampart">
 							K-Blog📝
 						</span>
 
-						<div class="pt-12" id="login-panel">
-							<h1 class="text-xl md:text-2xl font-bold leading-tight text-gray-700 text-center font-inter">
+						<div className="pt-12" id="login-panel">
+							<h1 className="text-xl md:text-2xl font-bold leading-tight text-gray-700 text-center font-inter">
 								{signUp ? "Sign Up" : "Sign In"}
 							</h1>
 
-							<form class="mt-6">
+							<form className="mt-6">
 								{signUp && (
 									<div className="relative mt-10">
 										<input
 											id="userName"
 											name="userName"
 											type="text"
+											autoComplete="username"
 											className="peer h-10 w-full border-b-2 border-red-200 text-gray-900 placeholder-transparent focus:outline-none focus:border-red-400 pl-2 font-sourceCodePro"
 											placeholder="johnDoe"
 											onChange={(e) => setUserName(e.target.value)}
 											value={userName}
 										/>
 										<label
-											for="userName"
+											htmlFor="userName"
 											className="absolute left-2 -top-6 text-gray-600 text-sm transition-all peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-600 peer-placeholder-shown:top-2 peer-focus:-top-6 peer-focus:text-gray-600 peer-focus:text-sm font-sourceCodePro"
 										>
 											User Name
@@ -109,7 +113,7 @@ const AuthPage = () => {
 										value={email}
 									/>
 									<label
-										for="email"
+										htmlFor="email"
 										className="absolute left-2 -top-6 text-gray-600 text-sm transition-all peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-600 peer-placeholder-shown:top-2 peer-focus:-top-6 peer-focus:text-gray-600 peer-focus:text-sm font-sourceCodePro"
 									>
 										Email address
@@ -120,14 +124,15 @@ const AuthPage = () => {
 									<input
 										id="password"
 										name="password"
-										type="text"
+										type="password"
+										autoComplete="current-password"
 										className="peer h-10 w-full border-b-2 border-red-200 text-gray-900 placeholder-transparent focus:outline-none focus:border-red-400 pl-2 font-sourceCodePro"
 										placeholder="john@doe.com"
 										onChange={(e) => setPassword(e.target.value)}
 										value={password}
 									/>
 									<label
-										for="password"
+										htmlFor="password"
 										className="absolute left-2 -top-6 text-gray-600 text-sm transition-all peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-600 peer-placeholder-shown:top-2 peer-focus:-top-6 peer-focus:text-gray-600 peer-focus:text-sm font-sourceCodePro"
 									>
 										Password
@@ -139,14 +144,14 @@ const AuthPage = () => {
 										<input
 											id="cPassword"
 											name="cPassword"
-											type="text"
+											type="password"
 											className="peer h-10 w-full border-b-2 border-red-200 text-gray-900 placeholder-transparent focus:outline-none focus:border-red-400 pl-2 font-sourceCodePro"
 											placeholder="john@doe.com"
 											onChange={(e) => setCPassword(e.target.value)}
 											value={cPassword}
 										/>
 										<label
-											for="cPassword"
+											htmlFor="cPassword"
 											className="absolute left-2 -top-6 text-gray-600 text-sm transition-all peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-600 peer-placeholder-shown:top-2 peer-focus:-top-6 peer-focus:text-gray-600 peer-focus:text-sm font-sourceCodePro"
 										>
 											Confirm Password

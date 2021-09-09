@@ -8,10 +8,10 @@ const Header = () => {
 
 	const router = useRouter();
 
-	const handleLogOut = (e) => {
-		e.preventDefault();
+	const handleLogOut = () => {
 		Cookie.remove("userData");
 		Cookie.remove("token");
+		setIsLoggedIn(false);
 		router.push("/");
 	};
 
@@ -35,7 +35,7 @@ const Header = () => {
 						<Link href="/">
 							<a className="hoverEffect font-klee">Services</a>
 						</Link>
-						<Link href="/markdown/mdInput">
+						<Link href="/mdInput">
 							<a className="hoverEffect font-klee">Create Blog</a>
 						</Link>
 						<Link href="/">
