@@ -10,6 +10,7 @@ import rehypeKatex from "rehype-katex";
 import "katex/dist/katex.min.css";
 import axios from "axios";
 import Cookie from "js-cookie";
+import withAuth from "./components/withAuth";
 
 const MdInput = () => {
 	const [cover, setCover] = useState("");
@@ -23,9 +24,10 @@ const MdInput = () => {
 	const [user, setUser] = useState(null);
 
 	useEffect(() => {
-		setToken(Cookie.get("token"));
+		const userToken = Cookie.get("token");
+		setToken(userToken);
 		setUser(JSON.parse(Cookie.get("userData")));
-	}, [token]);
+	}, [token, user]);
 
 	const config = {
 		headers: {
@@ -233,4 +235,4 @@ const MdInput = () => {
 	);
 };
 
-export default MdInput;
+export default withAuth(MdInput);

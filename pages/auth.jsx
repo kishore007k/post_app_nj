@@ -107,6 +107,7 @@ const AuthPage = () => {
 										id="email"
 										name="email"
 										type="text"
+										autoComplete="username"
 										className="peer h-10 w-full border-b-2 border-red-200 text-gray-900 placeholder-transparent focus:outline-none focus:border-red-400 pl-2 font-sourceCodePro"
 										placeholder="john@doe.com"
 										onChange={(e) => setEmail(e.target.value)}
@@ -162,10 +163,10 @@ const AuthPage = () => {
 								{signUp ? (
 									<></>
 								) : (
-									<div class="text-right mt-2">
+									<div className="text-right mt-2">
 										<a
 											href="#"
-											class="text-sm font-semibold font-sourceCodePro text-gray-700"
+											className="text-sm font-semibold font-sourceCodePro text-gray-700"
 										>
 											Forgot password ?
 										</a>
@@ -175,7 +176,7 @@ const AuthPage = () => {
 								{signUp ? (
 									<button
 										type="submit"
-										class="w-full block bg-red-400 hover:bg-red-300 focus:bg-red-400 focus:outline-none text-white font-semibold tracking-widest rounded-lg px-4 py-3 mt-6 font-inter"
+										className="w-full block bg-red-400 hover:bg-red-300 focus:bg-red-400 focus:outline-none text-white font-semibold tracking-widest rounded-lg px-4 py-3 mt-6 font-inter"
 										onClick={handleSignUp}
 									>
 										Sign Up
@@ -183,7 +184,7 @@ const AuthPage = () => {
 								) : (
 									<button
 										type="submit"
-										class="w-full block bg-red-400 hover:bg-red-300 focus:bg-red-400 focus:outline-none text-white font-semibold tracking-widest rounded-lg px-4 py-3 mt-6 font-inter"
+										className="w-full block bg-red-400 hover:bg-red-300 focus:bg-red-400 focus:outline-none text-white font-semibold tracking-widest rounded-lg px-4 py-3 mt-6 font-inter"
 										onClick={handleSignIn}
 									>
 										Sign In
@@ -191,13 +192,13 @@ const AuthPage = () => {
 								)}
 							</form>
 
-							<hr class="my-6 border-gray-300 w-full" />
+							<hr className="my-6 border-gray-300 w-full" />
 
 							<button
 								type="button"
-								class="w-full block bg-white hover:bg-gray-100 focus:bg-gray-100 focus:outline-none text-gray-900 font-semibold rounded-lg px-4 py-3 border border-gray-300 mt-4"
+								className="w-full block bg-white hover:bg-gray-100 focus:bg-gray-100 focus:outline-none text-gray-900 font-semibold rounded-lg px-4 py-3 border border-gray-300 mt-4"
 							>
-								<div class="flex items-center justify-center">
+								<div className="flex items-center justify-center">
 									<svg className="w-7 h-7" viewBox="0 0 42 40" fill="none">
 										<g filter="url(#filter0_d)">
 											<path
@@ -255,16 +256,16 @@ const AuthPage = () => {
 										</defs>
 									</svg>
 
-									<span class="ml-4 font-inter text-gray-700">
+									<span className="ml-4 font-inter text-gray-700">
 										{signUp ? "Sign Up" : "Sign In"} with Google
 									</span>
 								</div>
 							</button>
 
-							<p class="mt-8 text-center font-inter tracking-wider">
+							<p className="mt-8 text-center font-inter tracking-wider">
 								Not a member ?
 								<button
-									class="text-red-400 hover:text-red-500 font-semibold pl-2"
+									className="text-red-400 hover:text-red-500 font-semibold pl-2"
 									id="signup-link"
 									onClick={handleChange}
 								>
