@@ -4,25 +4,17 @@ import { useRouter } from "next/router";
 
 const backendUrl = process.env.BACKEND_URL;
 
-const verifyToken = ({ token }) => {
-	const user = JSON.parse(Cookies.get("userData"));
-	const data = axios
-		.get(`${backendUrl}/users/singleUser/${user._id}`)
+const verifyToken = ({ id, secret }) => {
+	const response = axios
+		.get(`${backendUrl}/users/singleUser/${id}`)
 		.then((res) => {
-			if (!res) {
-				return false;
+			if (res.data.data.secretKey !== secret) {
+				return null;
 			}
-			const userToken = res.data.token;
-
-			if (userToken !== token) {
-				return true;
-			}
-
-			return true;
+			return res.data.data;
 		})
 		.catch((err) => console.log(err));
-	console.log(data);
-	return data;
+	return response;
 };
 
 const withAuth = (WrapperComponent) => {
@@ -35,8 +27,6 @@ const withAuth = (WrapperComponent) => {
 				router.replace("/auth");
 				return null;
 			}
-
-			verifyToken({ token });
 
 			return <WrapperComponent {...props} />;
 		}

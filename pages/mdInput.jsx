@@ -11,6 +11,9 @@ import "katex/dist/katex.min.css";
 import axios from "axios";
 import Cookie from "js-cookie";
 import withAuth from "./components/withAuth";
+import { useDispatch } from "react-redux";
+import { createPost } from "../redux/actions";
+import router from "next/router";
 
 const MdInput = () => {
 	const [cover, setCover] = useState("");
@@ -23,11 +26,15 @@ const MdInput = () => {
 	const [token, setToken] = useState("");
 	const [user, setUser] = useState(null);
 
+	const dispatch = useDispatch();
+
+	const backendUrl = process.env.BACKEND_URL;
+
 	useEffect(() => {
 		const userToken = Cookie.get("token");
 		setToken(userToken);
 		setUser(JSON.parse(Cookie.get("userData")));
-	}, [token, user]);
+	}, []);
 
 	const config = {
 		headers: {
@@ -36,20 +43,26 @@ const MdInput = () => {
 	};
 
 	const sendData = async () => {
-		const response = await axios.post(
-			`${BACKEND_URL}/posts/create`,
-			{
-				title,
-				pImage: cover,
-				pBody: textValue,
-				pAuthor: user._id,
-				category,
-				tag,
-			},
-			config
-		);
-		const data = await response.data.data;
-		console.log(data);
+		const response = await axios
+			.post(
+				`${backendUrl}/posts/create`,
+				{
+					title,
+					pImage: cover,
+					pBody: textValue,
+					pAuthor: user._id,
+					category,
+					tag,
+				},
+				config
+			)
+			.then((res) => {
+				dispatch(createPost(res.data));
+				router.replace("/");
+			})
+			.catch((err) => console.log(err));
+
+		return response;
 	};
 
 	return (

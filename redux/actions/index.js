@@ -13,3 +13,17 @@ export const userSignIn = (data) => {
 		payload: data,
 	};
 };
+
+export const createPost = (data) => {
+	return {
+		type: ActionTypes.CREATE_POST,
+		payload: data,
+	};
+};
+
+export const updatePost = (data) => {
+	return {
+		type: ActionTypes.UPDATE_POST,
+		payload: data,
+	};
+};
