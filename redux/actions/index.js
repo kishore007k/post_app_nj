@@ -27,3 +27,10 @@ export const updatePost = (data) => {
 		payload: data,
 	};
 };
+
+export const getAllPosts = (data) => {
+	return {
+		type: ActionTypes.GET_ALL_POSTS,
+		payload: data,
+	};
+};

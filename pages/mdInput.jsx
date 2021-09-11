@@ -1,13 +1,12 @@
 import { useState, useEffect } from "react";
 import FileBase from "react-file-base64";
 import Layout from "./components/layout";
-
 import ReactMarkdown from "react-markdown";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
-import remarkGfm from "remark-gfm";
 import "react-markdown-editor-lite/lib/index.css";
-import rehypeKatex from "rehype-katex";
 import "katex/dist/katex.min.css";
+import rehypeKatex from "rehype-katex";
+import remarkGfm from "remark-gfm";
 import axios from "axios";
 import Cookie from "js-cookie";
 import withAuth from "./components/withAuth";
@@ -21,6 +20,7 @@ const MdInput = () => {
 	const [textValue, setTextValue] = useState("");
 	const [category, setCategory] = useState("");
 	const [tag, setTag] = useState("");
+	const [slug, setSlug] = useState("");
 
 	const [editMode, setEditMode] = useState(true);
 	const [token, setToken] = useState("");
@@ -48,6 +48,7 @@ const MdInput = () => {
 				`${backendUrl}/posts/create`,
 				{
 					title,
+					slug,
 					pImage: cover,
 					pBody: textValue,
 					pAuthor: user._id,
@@ -138,6 +139,13 @@ const MdInput = () => {
 								)}
 							</div>
 							<div className="flex justify-center px-8">
+								<input
+									type="text"
+									placeholder="Type your Slug here..."
+									className="text-2xl w-full font-inter text-skin-base tracking-wider outline-none placeholder-gray-400 mt-10 px-3 py-2 bg-gray-50"
+									onChange={(e) => setSlug(e.target.value)}
+									value={slug}
+								/>
 								<input
 									type="text"
 									placeholder="Category"
@@ -236,9 +244,9 @@ const MdInput = () => {
 			</div>
 
 			{/* Save Btn */}
-			<div>
+			<div className="fixed top-28 right-40">
 				<button
-					className="px-3 py-2 border border-red-400 text-xl font-inter"
+					className="px-5 py-2 bg-blue-50 rounded-sm text-xl font-inter justify-end text-blue-500 drop-shadow-md transition-all duration-200 hover:drop-shadow-lg hover:bg-blue-500 hover:text-white"
 					onClick={sendData}
 				>
 					Save

@@ -1,3 +1,7 @@
+import axios from "axios";
+import { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
+import { getAllPosts } from "../../redux/actions";
 import Card from "../components/card";
 
 const data = [
@@ -62,20 +66,38 @@ const data = [
 ];
 
 const PostGrid = () => {
+	const backendUrl = process.env.BACKEND_URL;
+	const [posts, setPosts] = useState([]);
+	const dispatch = useDispatch();
+
+	useEffect(async () => {
+		const posts = await axios
+			.get(`${backendUrl}/posts`)
+			.then((res) => {
+				dispatch(getAllPosts(res.data));
+				setPosts(res.data.data);
+			})
+			.catch((err) => console.log(err));
+		return posts;
+	}, []);
+
 	return (
-		<div className="grid grid-cols-4 gap-5 pb-20">
-			{data.map((item, index) => (
-				<Card
-					key={index}
-					title={item.title}
-					desc={item.desc}
-					image={item.image}
-					category={item.category}
-					slug={item.slug}
-					id={item.id}
-				/>
-			))}
-		</div>
+		<>
+			<div className="grid grid-cols-4 gap-5 pb-20">
+				{data.map((item, index) => (
+					<Card
+						key={index}
+						title={item.title}
+						desc={item.desc}
+						image={item.image}
+						category={item.category}
+						slug={item.slug}
+						id={item.id}
+					/>
+				))}
+			</div>
+			{posts !== [] && posts.map((post) => <div>{post.title}</div>)}
+		</>
 	);
 };
 
