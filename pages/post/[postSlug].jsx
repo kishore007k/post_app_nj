@@ -4,7 +4,9 @@ import { ImQuotesLeft } from "react-icons/im";
 
 const PostDetails = () => {
 	const router = useRouter();
-	const postId = router.query.postId;
+	const postSlug = router;
+
+	console.log(postSlug);
 
 	return (
 		<div>

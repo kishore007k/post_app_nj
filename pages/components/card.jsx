@@ -1,9 +1,9 @@
 import Link from "next/link";
 
-const Card = ({ title, image, category, desc, id }) => {
+const Card = ({ title, image, category, desc, slug }) => {
 	return (
 		<div className="mt-20">
-			<Link href={`/post/${id}`}>
+			<Link href={`/post/${encodeURIComponent(slug)}`}>
 				<a>
 					<div className="w-full h-52 mb-5">
 						<img

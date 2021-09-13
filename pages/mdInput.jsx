@@ -13,6 +13,8 @@ import withAuth from "./components/withAuth";
 import { useDispatch } from "react-redux";
 import { createPost } from "../redux/actions";
 import router from "next/router";
+import Cookies from "js-cookie";
+import Link from "next/link";
 
 const MdInput = () => {
 	const [cover, setCover] = useState("");
@@ -21,10 +23,11 @@ const MdInput = () => {
 	const [category, setCategory] = useState("");
 	const [tag, setTag] = useState("");
 	const [slug, setSlug] = useState("");
+	const [desc, setDesc] = useState("");
 
 	const [editMode, setEditMode] = useState(true);
 	const [token, setToken] = useState("");
-	const [user, setUser] = useState(null);
+	const [user, setUser] = useState({});
 
 	const dispatch = useDispatch();
 
@@ -32,12 +35,14 @@ const MdInput = () => {
 
 	useEffect(() => {
 		const userToken = Cookie.get("token");
+		const userData = JSON.parse(decodeURIComponent(Cookies.get("userData")));
 		setToken(userToken);
-		setUser(JSON.parse(Cookie.get("userData")));
+		setUser(userData);
 	}, []);
 
 	const config = {
 		headers: {
+			"Access-Control-Allow-Origin": "*",
 			Authorization: `Bearer ${token}`,
 		},
 	};
@@ -53,6 +58,7 @@ const MdInput = () => {
 					pBody: textValue,
 					pAuthor: user._id,
 					category,
+					desc,
 					tag,
 				},
 				config
@@ -68,7 +74,7 @@ const MdInput = () => {
 
 	return (
 		<Layout>
-			<div className="container mx-auto max-w-screen-lg pt-40 mb-10">
+			<div className="container mx-auto max-w-screen-lg pt-40 mb-10 flex">
 				<div className="flex justify-end items-center w-full ml-auto space-x-5">
 					<button
 						onClick={() => setEditMode(true)}
@@ -149,15 +155,15 @@ const MdInput = () => {
 								<input
 									type="text"
 									placeholder="Category"
-									className="text-2xl w-full font-inter text-skin-base tracking-wider outline-none placeholder-gray-400 mt-10 px-3 py-2 bg-gray-50"
-									onChange={(e) => setCategory(e.target.value)}
+									className="text-2xl w-full font-inter text-skin-base tracking-wider outline-none placeholder-gray-400 mt-10 px-3 py-2 bg-gray-50 lowercase"
+									onChange={(e) => setCategory(e.target.value.toUpperCase())}
 									value={category}
 								/>
 								<input
 									type="text"
 									placeholder="Tag"
-									className="text-2xl w-full font-inter text-skin-base tracking-wider outline-none placeholder-gray-400 mt-10 px-3 py-2 bg-gray-50"
-									onChange={(e) => setTag(e.target.value)}
+									className="text-2xl w-full font-inter text-skin-base tracking-wider outline-none placeholder-gray-400 mt-10 px-3 py-2 bg-gray-50 lowercase"
+									onChange={(e) => setTag(e.target.value.toUpperCase())}
 									value={tag}
 								/>
 							</div>
@@ -168,6 +174,15 @@ const MdInput = () => {
 									className="text-2xl w-full font-inter text-skin-base tracking-wider outline-none placeholder-gray-400 mt-10 px-3 py-2 bg-gray-50"
 									onChange={(e) => setTitle(e.target.value)}
 									value={title}
+								/>
+							</div>
+							<div className="px-8 py-5 w-full">
+								<input
+									type="text"
+									placeholder="Type the description of the post here..."
+									className="text-2xl w-full font-inter text-skin-base tracking-wider outline-none placeholder-gray-400 mt-10 px-3 py-2 bg-gray-50"
+									onChange={(e) => setDesc(e.target.value)}
+									value={desc}
 								/>
 							</div>
 							<div className="block w-full h-10 bg-gray-200 my-5" />
