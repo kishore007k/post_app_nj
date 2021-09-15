@@ -2,6 +2,7 @@ import Link from "next/link";
 import Cookie from "js-cookie";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
+import DropDown from "./dropDown";
 
 const Header = () => {
 	const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -35,9 +36,6 @@ const Header = () => {
 						<Link href="/">
 							<a className="hoverEffect font-klee">Services</a>
 						</Link>
-						<Link href="/mdInput">
-							<a className="hoverEffect font-klee">Create Blog</a>
-						</Link>
 						<Link href="/">
 							<a className="hoverEffect font-klee">Work</a>
 						</Link>
@@ -47,6 +45,7 @@ const Header = () => {
 						<Link href="/">
 							<a className="hoverEffect font-klee">About</a>
 						</Link>
+						<DropDown />
 					</ul>
 					<div>
 						{isLoggedIn ? (

@@ -34,3 +34,63 @@ export const getAllPosts = (data) => {
 		payload: data,
 	};
 };
+
+export const createCategory = (data) => {
+	return {
+		type: ActionTypes.CREATE_CATEGORY,
+		payload: data,
+	};
+};
+
+export const createTag = (data) => {
+	return {
+		type: ActionTypes.CREATE_TAG,
+		payload: data,
+	};
+};
+
+export const getAllCategories = (data) => {
+	return {
+		type: ActionTypes.GET_ALL_CATEGORIES,
+		payload: data,
+	};
+};
+
+export const getAllTags = (data) => {
+	return {
+		type: ActionTypes.GET_ALL_TAGS,
+		payload: data,
+	};
+};
+
+export const getCategory = (data) => {
+	return {
+		type: ActionTypes.GET_CATEGORY,
+		payload: data,
+	};
+};
+
+export const getTag = (data) => {
+	return {
+		type: ActionTypes.GET_TAG,
+		payload: data,
+	};
+};
+
+export const deleteCategory = () => {
+	return {
+		type: ActionTypes.DELETE_CATEGORY,
+	};
+};
+
+export const deleteTag = () => {
+	return {
+		type: ActionTypes.DELETE_TAG,
+	};
+};
+
+export const deletePost = () => {
+	return {
+		type: ActionTypes.DELETE_POST,
+	};
+};

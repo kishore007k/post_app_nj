@@ -1,22 +1,37 @@
 import { useState, useEffect } from "react";
 import FileBase from "react-file-base64";
-import Layout from "./components/layout";
-import ReactMarkdown from "react-markdown";
-import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
-import "react-markdown-editor-lite/lib/index.css";
-import "katex/dist/katex.min.css";
-import rehypeKatex from "rehype-katex";
-import remarkGfm from "remark-gfm";
+import Layout from "../components/layout";
 import axios from "axios";
-import Cookie from "js-cookie";
-import withAuth from "./components/withAuth";
+import withAuth from "../components/withAuth";
 import { useDispatch } from "react-redux";
-import { createPost } from "../redux/actions";
+import { createPost } from "../../redux/actions";
 import router from "next/router";
 import Cookies from "js-cookie";
-import Link from "next/link";
 
-const MdInput = () => {
+import Markdown from "markdown-to-jsx";
+import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
+import materialDarkStyle from "../components/materialDarkStyle";
+
+const CodeBlock = ({ className, children }) => {
+	let lang = "text";
+	if (className && className.startsWith("lang-")) {
+		lang = className.replace("lang-", "");
+	}
+	return (
+		<SyntaxHighlighter language={lang} style={materialDarkStyle}>
+			{children}
+		</SyntaxHighlighter>
+	);
+};
+
+const PreBlock = ({ children, ...rest }) => {
+	if ("type" in children && children["type"] === "code") {
+		return CodeBlock(children["props"]);
+	}
+	return <pre {...rest}>{children}</pre>;
+};
+
+const CreatePosts = () => {
 	const [cover, setCover] = useState("");
 	const [title, setTitle] = useState("");
 	const [textValue, setTextValue] = useState("");
@@ -34,7 +49,7 @@ const MdInput = () => {
 	const backendUrl = process.env.BACKEND_URL;
 
 	useEffect(() => {
-		const userToken = Cookie.get("token");
+		const userToken = Cookies.get("token");
 		const userData = JSON.parse(decodeURIComponent(Cookies.get("userData")));
 		setToken(userToken);
 		setUser(userData);
@@ -54,11 +69,11 @@ const MdInput = () => {
 				{
 					title,
 					slug,
-					pImage: cover,
+					desc,
 					pBody: textValue,
+					pImage: cover,
 					pAuthor: user._id,
 					category,
-					desc,
 					tag,
 				},
 				config
@@ -231,28 +246,15 @@ const MdInput = () => {
 						</div>
 
 						<div className="flex flex-col min-w-full w-full h-full prose lg:prose-xl">
-							<ReactMarkdown
-								children={textValue}
-								remarkPlugins={[remarkGfm]}
-								rehypePlugins={[rehypeKatex]}
-								components={{
-									code({ node, inline, className, children, ...props }) {
-										const match = /language-(\w+)/.exec(className || "");
-										return !inline && match ? (
-											<SyntaxHighlighter
-												children={String(children).replace(/\n$/, "")}
-												language={match[1]}
-												PreTag="div"
-												{...props}
-											/>
-										) : (
-											<code className={className} {...props}>
-												{children}
-											</code>
-										);
+							<Markdown
+								options={{
+									overrides: {
+										pre: PreBlock,
 									},
 								}}
-							/>
+							>
+								{textValue}
+							</Markdown>
 						</div>
 					</div>
 				</div>
@@ -271,4 +273,4 @@ const MdInput = () => {
 	);
 };
 
-export default withAuth(MdInput);
+export default withAuth(CreatePosts);
